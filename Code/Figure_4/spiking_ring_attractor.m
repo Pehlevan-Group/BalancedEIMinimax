@@ -1,4 +1,9 @@
 % spiking model for ring attractor
+% input:
+%   theta_1 : inhomogeneous input theta_0 during 0-10s (ring attractor)
+%   theta_2 : inhomogeneous input theta_0 during 20-30s (ring attractor)
+%   gamma : angular frequency for travelling wave
+
 function [] = spiking_ring_attractor(theta_1,theta_2,gamma)
 tau = 0.1;
 

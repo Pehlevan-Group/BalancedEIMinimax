@@ -1,7 +1,7 @@
-function [] = fixed_point_attractor(index, noise)
 % spiking model with learned weights 
 % input: index - the index of the attractor state to recover
 %        noise - noise during initialization
+function [] = fixed_point_attractor(index, noise)
 tau_E = 0.1;
 tau_I = 0.08;
 load('./Data/optim_w.mat') % load the learned weights

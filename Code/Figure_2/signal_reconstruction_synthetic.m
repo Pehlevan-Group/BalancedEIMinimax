@@ -1,9 +1,10 @@
-function [] = signal_reconstruction_synthetic(NE,integrator)
 % spiking model for signal reconstruction
 
 % input: NE - number of excitatory neurons
 %        integrator - 1 for time varying signal, 0 for input with constant
 %        firing rate
+
+function [] = signal_reconstruction_synthetic(NE,integrator)
 
 set(0,'DefaultAxesColorOrder',brewermap(NaN,'Paired'))
 color = get(gca,'colororder');
