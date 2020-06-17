@@ -1,5 +1,5 @@
 # BalancedEIMinimax
-Code for Neurips submission "Minimax Dynamics of Optimally Balanced Spiking Networks of Excitatory and Inhibitory Neurons".
+Code for "Minimax Dynamics of Optimally Balanced Spiking Networks of Excitatory and Inhibitory Neurons".
 The four subfolders contains codes/data needed to reproduce each figure in the main text.
 * Figure 1: 
   * To reproduce panels in figure 1 with data stored in Data folder
