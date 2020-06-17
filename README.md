@@ -21,15 +21,15 @@ The four subfolders contains codes/data needed to reproduce each figure in the m
   ```
   * To simulate network for signal reconstruction of spike trains with constant firing rate, with NE excitatory neurons
   ```
-  [] = signal_reconstruction_synthetic(NE,0)
+  signal_reconstruction_synthetic(NE,0)
   ```
   * To simulate network for signal reconstruction of time varying input
   ```
-  [] = signal_reconstruction_synthetic(NE,1)
+  signal_reconstruction_synthetic(NE,1)
   ```
   * To simulate network for signal reconstruction of natural image patches n with NI inhibitory neurons
   ```
-  [] = signal_reconstruction_image(n,NI)
+  signal_reconstruction_image(n,NI)
   ```
 * Figure 3:
   * To reproduce panels in figure 3 with data stored in Data folder
@@ -38,7 +38,7 @@ The four subfolders contains codes/data needed to reproduce each figure in the m
   ```
   * To simulate network with learned weights run
   ```
-  [] = fixed_point_attractor(index, noise)
+  fixed_point_attractor(index, noise)
   ```
 * Figure 4:
   * To reproduce panels in figure 4 with data stored in Data folder
@@ -47,11 +47,11 @@ The four subfolders contains codes/data needed to reproduce each figure in the m
   ```
   * To simulate network that stores ring attractor
   ```
-  [] = spiking_ring_attractor(theta_1,theta_2,gamma)
+  spiking_ring_attractor(theta_1,theta_2,gamma)
   ```
   * Simulate network for grid attractor
   ```
-  [] = spiking_grid_attractor()
+  spiking_grid_attractor()
   ```
 For meanings of the parameters in the above example code type 
  ```
