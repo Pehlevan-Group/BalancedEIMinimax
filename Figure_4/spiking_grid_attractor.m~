@@ -1,0 +1,81 @@
+% spiking model for grid attractor
+function [] = spiking_grid_attractor()
+
+tau_E = .5;
+tau_I = .2;
+tau = .5;
+
+% parameters of the model
+lambda = 6;
+beta = 3/lambda^2;
+alpha = 1.1;
+gamma = 1.2*beta;
+N_E = 63^2;
+N_I = 63^2;
+N = N_E+N_I;
+h0 = 2;
+NE = N_E;
+NI = N_I;
+noise = 0;
+
+% design weights
+[x,y] = meshgrid(-31:31,-31:31);
+d(1,:,:) = (x(:)-x(:)').^2 + (y(:)-y(:)').^2;
+d(2,:,:) = (x(:)-(x(:)'+63)).^2 + (y(:)-y(:)').^2;
+d(3,:,:) = (x(:)-x(:)').^2 + (y(:)-(y(:)+63)').^2;
+d(4,:,:) = (x(:)-(x(:)'+63)).^2 + (y(:)-(y(:)+63)').^2;
+d(5,:,:) = (x(:)-(x(:)'+63)).^2 + (y(:)-(y(:)-63)').^2;
+d_p = permute(d,[1,3,2]);
+d(6:10,:,:) = d_p;
+d = squeeze(min(d));
+exp_mat = alpha*exp(-gamma*d)-exp(-beta*d);
+W_IE = sqrt(201/N_I*abs(min(exp_mat(:)))*ones(N_I, N_E));
+W_EI = W_IE';
+W_II = eye(N_I);
+W_EE = 1/201*W_EI*W_IE + exp_mat;
+thetaI = zeros(N_I, 1);
+thetaE = zeros(N_E, 1);
+W_II = W_II + diag(ones(1, size(W_II,1)));
+W_EE = W_EE - diag(ones(1, size(W_EE,1)));
+v_th_e = -1/2*diag(W_EE)+thetaE;
+v_th_i = 1/2*diag(W_II)+thetaI;
+
+
+time = 30;
+dt = 0.001;
+time_all = dt:dt:time;
+
+spike_e = zeros(NE, length(time_all)+1);
+spike_i = zeros(NI, length(time_all)+1);
+y_e = zeros(NE, length(time_all)) + v_th_e;
+y_i = zeros(NI, length(time_all)) + v_th_i;
+
+input_e = zeros(NE, length(time_all)+1);
+input_i = zeros(NI, length(time_all)+1);
+input = zeros(NE, length(time_all)+1);
+
+
+
+x = binornd(1, dt*h0/tau*ones(NE,round(time/dt)));
+
+% simulation of the spiking network
+for i0 = 1:length(time_all)
+    spike_e(:, i0+1) =  (y_e(:, i0) > v_th_e);
+    spike_i(:, i0+1) =  (y_i(:, i0) > v_th_i);
+
+    input_e(:,i0+1) = input_e(:,i0) - dt/tau_E*(input_e(:,i0)) + spike_e(:,i0+1);
+    input_i(:,i0+1) = input_i(:,i0) - dt/tau_I*(input_i(:,i0)) + spike_i(:,i0+1);
+    input(:,i0+1) = input(:,i0) + dt/tau*(-input(:,i0) + tau/dt*x(:,i0));
+
+
+    y_i(:,i0+1) = W_IE*input_e(:,i0+1) - W_II*input_i(:,i0+1) ;
+    y_e(:,i0+1) = W_EE*input_e(:,i0+1) - W_EI*input_i(:,i0+1) + input(:,i0+1) + noise*normrnd(0,1,NE,1);
+end
+
+% plotting
+imagesc(reshape(input_e(:,i0)/tau,63,63));
+axis off
+colorbar
+title('spiking simulation','fontangle','italic')
+set(gca,'fontsize',20,'linewidth',2)
+end
