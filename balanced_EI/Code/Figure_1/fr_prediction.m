@@ -1,3 +1,4 @@
+function ropt = fr_prediction(tau,rate,re,ri,W_EE,W_EI,W_IE,W_II,F,NE,N)
 % input
 % tau: time constant
 % rate: input firing rate
@@ -6,11 +7,10 @@
 % W_EE,W_EI,W_IE,W_II,F: weights of the network
 % NE: number of E neurons
 % N: total number of neurons
+
 % return
 % ropt: firing rate of [E;I] neurons through optimization(solving KKT conditions)
 
-
-function ropt = fr_prediction(tau,rate,re,ri,W_EE,W_EI,W_IE,W_II,F,NE,N)
 
 options = optimoptions('fmincon','Display','iter','Algorithm','sqp','MaxFunctionEvaluations', 1e6,'OptimalityTolerance',1e-20,'StepTolerance',1e-6);
 

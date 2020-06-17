@@ -1,9 +1,15 @@
+function [] = fixed_point_attractor(index, noise)
 % spiking model with learned weights 
 % input: index - the index of the attractor state to recover
 %        noise - noise during initialization
+<<<<<<< HEAD:balanced_EI/Code/Figure_3/fixed_point_attractor.m
 function [] = fixed_point_attractor(index, noise)
 tau_E = 0.5;
 tau_I = 0.4;
+=======
+tau_E = 0.1;
+tau_I = 0.08;
+>>>>>>> parent of 967e711... Code for neurips submission:Code/Figure_3/fixed_point_attractor.m
 load('./Data/optim_w.mat') % load the learned weights
 
 NE = size(r_e, 1);

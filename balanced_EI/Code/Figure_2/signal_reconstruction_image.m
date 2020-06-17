@@ -1,9 +1,9 @@
+function [] = signal_reconstruction_image(n,NI)
 % spiking model for input reconstruction of natural image patches
 
 % input: n - the index of the image patch to reconstruct
 %        NI - number of inhibitory neurons
 
-function [] = signal_reconstruction_image(n,NI)
 load('./Data/A169.mat'); % dictionary learned from http://www.rctn.org/bruno/sparsenet/
 rng(1,'twister');
 

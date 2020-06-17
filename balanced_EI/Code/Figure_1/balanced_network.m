@@ -1,12 +1,15 @@
 % spiking model for firing rate predictions/objective
+function [rate,re,ri,W_EE,W_EI,W_IE,W_II,F,NE,N,tau] = balanced_network(tau)
+
 % input
 % tau: time constant of the network
+
+
 % returns
 % rate: firing rate of input
 % re: firing rate of E neurons
 % ri: firing rate of I neurons
 % W_EE,W_IE,W_II, W_EI, F: weights of the network
-function [rate,re,ri,W_EE,W_EI,W_IE,W_II,F,NE,N,tau] = balanced_network(tau)
 
 %% 
 rng(1,'twister');
